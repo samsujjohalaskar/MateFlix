@@ -1,14 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar';
-import backgroundImage from "../assets/home.jpg"
-import movieLogo from "../assets/homeTitle.webp"
-import {FaPlay} from "react-icons/fa"
-import {AiOutlineInfoCircle} from "react-icons/ai"
 import styled from 'styled-components';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovies, getGenres } from "../store/store";
 import Slider from "../components/Slider";
+import { onAuthStateChanged } from "firebase/auth";
+import { firebaseAuth } from "../utils/firebaseConfig";
+import Footer from "../components/Footer";
+import Banner from "../components/Banner";
 
 function MateFlix() {
 
@@ -30,9 +30,9 @@ function MateFlix() {
     }
   }, [dispatch,genres,genresLoaded]);
 
-  // onAuthStateChanged(firebaseAuth, (currentUser) => {
-  //   if (!currentUser) navigate("/login");
-  // });
+  onAuthStateChanged(firebaseAuth, (currentUser) => {
+    if (!currentUser) navigate("/login");
+  });
 
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
@@ -42,32 +42,9 @@ function MateFlix() {
   return (
     <Container>
       <Navbar isScrolled={isScrolled} />
-      <div className="hero">
-        <img
-          src={backgroundImage}
-          alt="background"
-          className="background-image"
-        />
-        <div className="container">
-          <div className="logo">
-            <img src={movieLogo} alt="Movie Logo" />
-          </div>
-          <div className="buttons flex">
-            <button
-              onClick={() => navigate("/player")}
-              className="flex j-center a-center"
-            >
-              <FaPlay />
-              Play
-            </button>
-            <button className="flex j-center a-center">
-              <AiOutlineInfoCircle />
-              More Info
-            </button>
-          </div>
-        </div>
-      </div>
+      <Banner/>
       <Slider movies={movies} />
+      <Footer/>
     </Container>
   );
 }

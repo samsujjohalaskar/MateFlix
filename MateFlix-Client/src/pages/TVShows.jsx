@@ -31,7 +31,7 @@ export default function TVShows() {
   }, [dispatch,genres,genresLoaded]);
 
   onAuthStateChanged(firebaseAuth, (currentUser) => {
-    // if (!currentUser) navigate("/login");
+    if (!currentUser) navigate("/login");
   });
 
   window.onscroll = () => {

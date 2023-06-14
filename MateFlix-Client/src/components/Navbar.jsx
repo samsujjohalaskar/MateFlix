@@ -93,7 +93,7 @@ const Container = styled.div`
       gap: 2rem;
       .brand {
         img {
-          height: 4rem;
+          height: 6rem;
         }
       }
       .links {

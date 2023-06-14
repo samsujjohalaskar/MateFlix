@@ -44,7 +44,7 @@ export default function LikedMovies() {
         <div className="grid flex">
             {
                 movies.map((movie,index) => {
-                    return <Card movieData = {movie} inde = {index} key={movie.id} ifLiked={true}/>
+                    return <Card movieData = {movie} index = {index} key={movie.id} ifLiked={true}/>
                 })
             }
         </div>

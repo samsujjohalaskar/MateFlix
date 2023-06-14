@@ -33,6 +33,7 @@ export default React.memo(function Card({movieData,index,key,ifLiked = false}) {
         console.log(err);
       }
     }
+    // console.log(movieData.name)
 
   return (
     <Container 
@@ -75,7 +76,8 @@ export default React.memo(function Card({movieData,index,key,ifLiked = false}) {
                     <div className="genres flex">
                         <ul className='flex'>{movieData.genres.map((genre) => (
                             <li key={genre}>{genre}</li>
-                        ))}</ul>
+                        ))}
+                        </ul>
                     </div>
                 </div>
             </div>

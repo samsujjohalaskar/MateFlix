@@ -16,7 +16,7 @@ export default function Movies() {
   const movies = useSelector((state) => state.MateFlix.movies);
   const genres = useSelector((state) => state.MateFlix.genres);
   const genresLoaded = useSelector((state) => state.MateFlix.genresLoaded);
-
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -26,12 +26,12 @@ export default function Movies() {
 
   useEffect(() => {
     if (genresLoaded) {
-      dispatch(fetchMovies({ genres, type: "movies" }));
+      dispatch(fetchMovies({ genres, type: "movie" }));
     }
   }, [dispatch,genres,genresLoaded]);
 
   onAuthStateChanged(firebaseAuth, (currentUser) => {
-    // if (!currentUser) navigate("/login");
+    if (!currentUser) navigate("/login");
   });
 
   window.onscroll = () => {

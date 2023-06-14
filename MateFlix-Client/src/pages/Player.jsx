@@ -6,6 +6,8 @@ import video from "../assets/video.mp4"
 
 export default function Player() {
   const navigate = useNavigate();
+
+  // console.log(name)
     
   return (
     <Container>

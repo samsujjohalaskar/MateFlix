@@ -80,9 +80,7 @@ export const getUserLikedMovies = createAsyncThunk("mateflix/getliked",async(ema
 })
 
 export const removeLikedMovies = createAsyncThunk("mateflix/removeliked",async({email,movieId}) => {
-    const {data: {movies}} = await axios.put(`http://localhost:5000/api/user/remove`,{
-        email,movieId
-    })
+    const {data: {movies}} = await axios.put(`http://localhost:5000/api/user/remove`,{email,movieId})
     return movies
 })     
     
