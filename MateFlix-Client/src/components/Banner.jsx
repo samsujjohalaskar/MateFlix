@@ -69,6 +69,7 @@ const Container = styled.div`
     height: 100vh;
     background-size: cover;
     background-position: center center;
+    margin-bottom: 40px;
   
     &__contents {
       display: flex;

@@ -7,8 +7,9 @@ import { onAuthStateChanged } from "firebase/auth";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import NotAvailable from "../components/NotAvailable";
-import Slider from "../components/Slider";
 import SelectingGenres from "../components/SelectingGenres";
+import CustomSlider from "../components/CustomSlider";
+import Footer from "../components/Footer";
 
 export default function Movies() {
 
@@ -47,10 +48,11 @@ export default function Movies() {
         <div className="data">
         <SelectingGenres genres={genres} type="movie"/>
             {
-                movies.length ? (<Slider movies={movies}/>):
+                movies.length ? (<CustomSlider movies={movies}/>):
                 (<NotAvailable/>)
             }
         </div>
+      <Footer/>
     </Container>
   )
 }

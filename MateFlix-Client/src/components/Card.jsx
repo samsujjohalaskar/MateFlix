@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import classNames from 'classnames';
 import { useNavigate } from "react-router-dom";
 import video from "../assets/video.mp4"
 import {onAuthStateChanged} from "firebase/auth"
@@ -14,7 +15,7 @@ import { useDispatch } from 'react-redux';
 import { removeLikedMovies } from '../store/store';
 
 
-export default React.memo(function Card({movieData,index,key,ifLiked = false}) {
+export default React.memo(function Card({movieData,index,key,ifLiked = false,isLarge}) {
 
     const [isHovered,setIsHovered] = useState(false);
     const navigate = useNavigate();
@@ -40,7 +41,18 @@ export default React.memo(function Card({movieData,index,key,ifLiked = false}) {
     onMouseEnter={() => setIsHovered(true)}
     onMouseLeave={() => setIsHovered(false)}
     >
-      <img src={`https://image.tmdb.org/t/p/w500${movieData.image}`} alt="card" />
+      <div key={movieData.id} className="media-card">
+      <img
+      className={classNames(
+          'media-card__poster',
+          { 'media-card__poster--large': isLarge },
+      )}
+      src={
+          isLarge
+          ? `https://image.tmdb.org/t/p/w500${movieData.image}`
+          : `https://image.tmdb.org/t/p/w300${movieData.image}`
+      }
+      alt={movieData.name}/>
       {
         isHovered && (
             <div className="hover">
@@ -75,91 +87,101 @@ export default React.memo(function Card({movieData,index,key,ifLiked = false}) {
                     </div>
                     <div className="genres flex">
                         <ul className='flex'>{movieData.genres.map((genre) => (
-                            <li key={genre}>{genre}</li>
+                            <ul key={genre}>&nbsp;{genre}&nbsp;|</ul>
                         ))}
                         </ul>
                     </div>
                 </div>
-            </div>
-        )
-      }
+            </div>            
+            )
+        } 
+        </div>
     </Container>
   )
 });
 
 const Container = styled.div`
-  max-width: 230px;
-  width: 230px;
-  height: 100%;
-  cursor: pointer;
-  position: relative;
-  img {
-    border-radius: 0.2rem;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-  }
-  .hover {
-    z-index: 99;
-    height: max-content;
-    width: 20rem;
-    position: absolute;
-    top: -18vh;
-    left: 0;
-    border-radius: 0.3rem;
-    box-shadow: rgba(0, 0, 0, 0.75) 0px 3px 10px;
-    background-color: #181818;
-    transition: 0.3s ease-in-out;
-    .image-video-container {
-      position: relative;
-      height: 140px;
-      img {
-        width: 100%;
-        height: 140px;
-        object-fit: cover;
-        border-radius: 0.3rem;
-        top: 0;
-        z-index: 4;
-        position: absolute;
+  .media-card {
+    position: relative;
+    cursor: pointer;
+    transition: 360ms;
+    img {
+        border-radius: 0.2rem;
+        z-index: 10;
       }
-      video {
-        width: 100%;
-        height: 140px;
-        object-fit: cover;
-        border-radius: 0.3rem;
-        top: 0;
-        z-index: 5;
-        position: absolute;
-      }
-    }
-    .info-container {
-      padding: 1rem;
-      gap: 0.5rem;
-    }
-    .icons {
-      .controls {
-        display: flex;
-        gap: 1rem;
-      }
-      svg {
-        font-size: 2rem;
-        cursor: pointer;
-        transition: 0.3s ease-in-out;
-        &:hover {
-          color: #b8b8b8;
+    
+    &:hover {
+      transform: scale(1.1);
+      
+      .media-card {
+        &__cover {
+          opacity: 1;
         }
       }
     }
-    .genres {
-      ul {
-        gap: 1rem;
-        li {
-          padding-right: 0.7rem;
-          &:first-of-type {
-            list-style-type: none;
+    
+    &__poster {
+      flex: 0 0 auto;
+      object-fit: cover;
+      height: 120px;
+      width: 200px;
+      transition: transform 360ms;
+      margin-right: 10px;
+      
+      &--large {
+        height: 250px;
+      }
+    }
+    .hover {
+      z-index: 99;
+      height: max-content;
+      width: 20rem;
+      position: absolute;
+      top: -18vh;
+      left: -6vh;
+      border-radius: 0.3rem;
+      box-shadow: rgba(0, 0, 0, 0.75) 0px 3px 10px;
+      background-color: #181818;
+      transition: 0.3s ease-in-out;
+      .image-video-container {
+        position: relative;
+        height: 140px;
+        img {
+          width: 100%;
+          height: 140px;
+          object-fit: cover;
+          border-radius: 0.3rem;
+          top: 0;
+          z-index: 4;
+          position: absolute;
+        }
+        video {
+          width: 100%;
+          height: 140px;
+          object-fit: cover;
+          border-radius: 0.3rem;
+          top: 0;
+          z-index: 5;
+          position: absolute;
+        }
+      }
+      .info-container {
+        padding: 1rem;
+        gap: 0.5rem;
+      }
+      .icons {
+        .controls {
+          display: flex;
+          gap: 1rem;
+        }
+        svg {
+          font-size: 2rem;
+          cursor: pointer;
+          transition: 0.3s ease-in-out;
+          &:hover {
+            color: #b8b8b8;
           }
         }
       }
     }
-  }
 `;

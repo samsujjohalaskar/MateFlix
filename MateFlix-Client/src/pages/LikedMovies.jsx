@@ -7,6 +7,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import Card from "../components/Card";
+import Footer from "../components/Footer";
 
 export default function LikedMovies() {
 
@@ -49,6 +50,7 @@ export default function LikedMovies() {
             }
         </div>
         </div>
+        <Footer/>
     </Container>
   )
 }
@@ -58,6 +60,7 @@ const Container = styled.div`
     margin: 2.3rem;
     margin-top: 8rem;
     gap: 3rem;
+    height: 75vh;
     h1 {
       margin-left: 3rem;
     }
