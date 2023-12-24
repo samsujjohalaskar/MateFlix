@@ -51,7 +51,7 @@ export default function Navbar({ isScrolled }) {
                 }
               }}
             >
-            <FaSearch />
+            <FaSearch title="Search"/>
             </button>
             <input
               type="text"
@@ -65,7 +65,7 @@ export default function Navbar({ isScrolled }) {
             />
           </div>
           <button onClick={() => signOut(firebaseAuth)}>
-            <FaPowerOff />
+            <FaPowerOff title="Logout"/>
           </button>
         </div>
       </nav>
@@ -137,6 +137,9 @@ const Container = styled.div`
           svg {
             color: white;
             font-size: 1.2rem;
+            &:hover {
+            color: #b8b8b8;
+          }
           }
         }
         input {

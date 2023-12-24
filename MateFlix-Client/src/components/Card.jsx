@@ -57,10 +57,10 @@ export default React.memo(function Card({movieData,index,key,ifLiked = false,isL
         isHovered && (
             <div className="hover">
                 <div className="image-video-container">
-                    <img src={`https://image.tmdb.org/t/p/w500${movieData.image}`} 
+                    {/* <img src={`https://image.tmdb.org/t/p/w500${movieData.image}`} 
                     alt="card" 
                     onClick={() => navigate("/player")}
-                    />
+                    /> */}
                     <video src={video} autoPlay loop controls muted onClick={() => navigate("/player")}/>
                 </div>
                 <div className="info-container flex column">
@@ -146,15 +146,15 @@ const Container = styled.div`
       .image-video-container {
         position: relative;
         height: 140px;
-        img {
-          width: 100%;
-          height: 140px;
-          object-fit: cover;
-          border-radius: 0.3rem;
-          top: 0;
-          z-index: 4;
-          position: absolute;
-        }
+        // img {
+        //   width: 100%;
+        //   height: 140px;
+        //   object-fit: cover;
+        //   border-radius: 0.3rem;
+        //   top: 0;
+        //   z-index: 4;
+        //   position: absolute;
+        // }
         video {
           width: 100%;
           height: 140px;

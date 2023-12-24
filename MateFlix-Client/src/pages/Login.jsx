@@ -18,8 +18,10 @@ const handleLogIn = async ()=> {
   try{
     const{email,password} = formValues;
     await signInWithEmailAndPassword(firebaseAuth,email,password)
+    alert("Logged In Successfully!")
   }catch(err){
-    console.log(err)
+    // console.log(err)
+    alert("Error: " + err.code)
   }
 }
 
